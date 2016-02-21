@@ -177,4 +177,42 @@ p [ship1, ship2, ship3].sort.map {|s| s.name}
 # with the given parameters
 
 # you can think of methods as message handlers
-# sometimes they are called recivers
+# the object you call the method on is sometimes called the reciver
+
+a = "abc"
+
+a.size
+a.send(:size)
+
+#this is visible in ruby, the send method also allows you to 
+#call private methods
+
+#this can be really convinent, and can cut down on boilerplate code
+
+#eg, not using send
+
+case input
+  when :up_arrow then ship.tilt_up
+  when :down_arrow then ship.tilt_down
+  when :left_arrow then ship.turn_left
+  when :right_arrow then ship.turn_right
+end
+
+#eg, using send
+
+handlers {up_arrow: :tilt_up,
+          down_arrow: :tilt_down,
+          left_arrow: :turn_left,
+          right_arrow: :turn_right}
+          
+ship.send(handlers[input])
+
+#alias is premade, since send is a common word, and is often 
+#overridden in classes
+ship.__send__(handlers[input])
+
+#side note: methods like double and puts come from the main class
+#check it by running 'self' in irb
+
+#-----------method_missing---------------
+
