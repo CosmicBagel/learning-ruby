@@ -23,8 +23,24 @@
   you can use underscores to make a numbmer more readable, much like
   you would use commas
   
-  100_999
+  100_999 
   0b1010_1111_0110
  
   
+=end
+
+#strings
+
+=begin
+set encoding by declaring 
+    #encoding: us-ascii
+as the first line
+default encoding is utf-8
+
+use backslash to escape characters, functions as you'd expect from 
+other languages
+
+to declare a string literal, use %q[this_is_literal]
+you can use any delimter you want, in this case I used '[' and ']'
+
 =end
