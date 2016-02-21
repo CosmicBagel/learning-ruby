@@ -105,3 +105,25 @@ see a.methods for a full list
   $' = post_match
   
 =end
+
+#LETS TALK ABOUT SYMBOLS
+
+=begin
+  attr_accessor :var_name
+  private :method_name
+  
+  A symbol is
+  :"abc"
+  :"3"
+  
+  basically anything that starts with :
+  
+  Good replacement for string labels, similar to enums
+  
+  Symbols only require object_id comparison, much lighter than string comp
+  
+  Easy to convert back and forth from string
+  :abc.to_s = "abc"
+  "abc".to_sym = :abc
+  
+=end 
