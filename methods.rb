@@ -216,3 +216,38 @@ ship.__send__(handlers[input])
 
 #-----------method_missing---------------
 
+#when a method is called that doesn't exist, method_missing will catch it
+#normally this just returns an error, but you can override it, 
+#just be sure to call super at the end of it for unhandled names
+
+def method_missing(name, *args)
+  if name == 'something'
+    puts name
+  else
+    super #real important
+end
+
+#best to be used sparingly, since it can make debugging difficult
+#can also create performace issues when many methods are 
+#being routed through it
+
+#additionally if you use respond_to? to check if a calss supports a method,
+#it will not pick up on functionality tucked away in method_missing
+#if you NEED this functionality, then you must also override the repsonds_to?
+#method
+
+def respond_to?(name, *args)
+  if name == 'something'
+    true
+  else
+    super #still fo real important
+end
+
+#-----------Other Metaprogramming Facilities---------------
+
+# const_missing | constants, not constructor
+
+# adding and removing methods at runtime
+
+# inhreited | executed everytime a subclass is created, this is an example
+#             of a hook method
