@@ -202,3 +202,77 @@ A::MAX_SPEED = 100
 p A::MAX_SPEED
 
 #You can not define constants inside a method, only at the class level
+
+#---------------Modules--------------
+
+#similar to classes, but can not be instantiated
+module SpaceStuff
+end
+
+#first utility is that modules provide namespacing
+module API
+  def self.hatch_list
+    #retrive hatch list
+  end
+end
+
+hatches = API.hatch_list
+
+module SpaceStuff
+  class Spaceship
+  end
+end
+
+#access stuff inside a module by using the scope operator ::
+ship = SpaceStuff::Spaceship.new
+
+#you can also nest modules
+
+#a common flavour of module is Mixins
+#this is ruby's solution for multiple inheritance
+#these modules modify classes, adding functionality
+
+#an example of a Mixin is the Enumerable module
+#Mixins typically contain instance methods, while namespace modules don't
+
+module AirControl
+  def measure_oxygen
+  end
+end
+
+class Spaceship
+  include AirControl
+  include Docking #doesn't exist
+end
+
+ship = Spaceship.new
+ship.measure_oxygen
+
+#mixins are inserted into the inheritance tree
+#eg
+=begin
+Object
+^^^
+AirControl
+^^^
+Docking
+^^^
+Spaceship
+=end
+
+#the order is important to know, you affect it by setting the order
+#of the include statements
+
+
+module Docking
+  def get_docking_params
+  end
+end
+#you can bring instance methods into a class from a module
+
+class Spaceship
+  extend Docking
+end
+
+Spaceship.get_docking_params
+
